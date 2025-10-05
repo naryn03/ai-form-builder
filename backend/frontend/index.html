@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>AI Dynamic Form Builder</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h2>AI Dynamic Form Builder (Vanilla)</h2>
+    <div class="muted">
+      Backend: FastAPI + LangGraph • Endpoints:
+      <code>/create_form</code>,
+      <code>/validate_submission</code>,
+      <code>/recover</code>,
+      <code>/analytics/{form_id}</code>
+    </div>
+
+    <!-- 1) Generate schema -->
+    <div class="card">
+      <h3>1) Describe your form</h3>
+      <textarea id="prompt" placeholder="e.g., Create a job application form with name, email, phone, start date, end date if they're still employed, and years of experience"></textarea>
+      <div class="row">
+        <button id="btnGenerate">Generate Schema</button>
+        <span id="genStatus" class="muted"></span>
+      </div>
+      <div id="schemaOut" class="hint" style="margin-top:12px;"></div>
+    </div>
+
+    <!-- 2) Render form -->
+    <div class="card" id="formCard" style="display:none;">
+      <div class="row" style="justify-content:space-between; align-items:baseline;">
+        <h3 id="formTitle">Generated Form</h3>
+        <span class="pill" id="formMeta">form_id: -</span>
+      </div>
+
+      <form id="dynamicForm"></form>
+
+      <div class="row" style="margin-top:12px;">
+        <button id="btnSubmit" type="button">Submit</button>
+        <button id="btnRecover" type="button" class="btn-alt">Recover Suggestions</button>
+        <span id="submitStatus" class="muted"></span>
+      </div>
+
+      <div id="validationBlock" style="margin-top:12px;"></div>
+    </div>
+
+    <!-- 3) Analytics -->
+    <div class="card" id="analyticsCard" style="display:none;">
+      <div class="row" style="justify-content:space-between; align-items:baseline;">
+        <h3>Submission Insights</h3>
+        <span class="pill" id="analyticsCount">0 submissions</span>
+      </div>
+      <pre id="analyticsPre">{}</pre>
+      <div class="hr"></div>
+      <button id="btnRefreshAnalytics" type="button">Refresh Analytics</button>
+    </div>
+  </div>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>

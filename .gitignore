@@ -1,0 +1,4 @@
+.env
+forms.db
+.venv/
+__pycache__
